@@ -22,7 +22,8 @@
   </q-card-section>
 
   <q-card-section class="description">
-    {{ plat.description }}
+    <span v-if="plat.description">{{ plat.description }}</span>
+    <i v-else>Aucune description fournie</i>
   </q-card-section>
 
   <q-card-actions
