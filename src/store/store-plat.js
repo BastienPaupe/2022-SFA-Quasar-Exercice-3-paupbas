@@ -1,4 +1,6 @@
 // State : données du magasin
+import { uid } from 'quasar'
+
 const state = {
   plats: [
     {
@@ -42,6 +44,19 @@ const mutations = {
     // Filtre les données du tableau
     // et garde les tâches dont l'id est différent de celui à supprimer
     state.plats = state.plats.filter(el => el.id !== id)
+  },
+  ajouterPlat (state, plat) {
+    state.plats.push(plat)
+  },
+  modifierPlat (state, plat) {
+    // Recherche le plat et retourne sa position dans le tableau, son index
+    const index = state.plats.findIndex(el => el.id === plat.id)
+    console.log(index, typeof plat.id)
+    // Si une tâche a été trouvée
+    if (index !== -1) {
+      // Modifie l'objet trouvé avec les nouvelles valeurs
+      Object.assign(state.plats[index], plat)
+    }
   }
 }
 
@@ -53,6 +68,15 @@ const actions = {
   supprimerPlat ({ commit }, id) {
     console.log('action supprimerTache')
     commit('supprimerPlat', id)
+  },
+  ajouterPlat ({ commit }, plat) {
+    const Id = uid()
+    plat.id = Id
+    // Commite l'ajout
+    commit('ajouterPlat', plat)
+  },
+  modifierPlat ({ commit }, plat) {
+    commit('modifierPlat', plat)
   }
 }
 

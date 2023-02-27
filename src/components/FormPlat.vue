@@ -8,6 +8,9 @@
 
     <div class="row q-mb-md">
       <q-input
+        ref="nameRef"
+        :rules="[val => !!val || 'Saisi requis',
+                 val => val.length <= 20 || '20 caractères maximum']"
         filled
         v-model="plat.nom"
         label="Nom (Burger)"
@@ -16,6 +19,8 @@
 
     <div class="row q-mb-md">
       <q-input
+        ref="descriRef"
+        :rules="[val => val.length <= 155 || '155 caractères maximum']"
         filled
         v-model="plat.description"
         label="Description"
@@ -55,16 +60,19 @@
       color="grey"
       v-close-popup />
     <q-btn
+      @click="envoiForm"
       label="Sauver"
-      color="primary"
-      v-close-popup />
+      color="primary" />
   </q-card-actions>
 </q-card>
 </template>
 
 <script>
+
+import { mapActions } from 'vuex'
+
 export default {
-  props: ['action'],
+  props: ['action', 'platAModifier'],
   data () {
     return {
       plat: {
@@ -73,6 +81,31 @@ export default {
         note: 1,
         image: ''
       }
+    }
+  },
+  methods: {
+    ...mapActions('plats', ['ajouterPlat', 'modifierPlat']),
+    envoiForm () {
+      this.$refs.nameRef.validate()
+      this.$refs.descriRef.validate()
+
+      if (!this.$refs.nameRef.hasError && !this.$refs.descriRef.hasError) {
+        this.$emit('close')
+        this.enregistrerPlat()
+      }
+    },
+    enregistrerPlat () {
+      if (this.action === 'ajouter') {
+        this.ajouterPlat(this.plat)
+      } else {
+        this.modifierPlat(this.plat)
+      }
+    }
+  },
+  mounted () {
+    if (this.platAModifier) {
+      // Copie les propriétés de plateAModifier dans un nouvel objet vide
+      this.plat = Object.assign({}, this.platAModifier)
     }
   }
 }

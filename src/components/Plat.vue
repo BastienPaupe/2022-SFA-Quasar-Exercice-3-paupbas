@@ -42,7 +42,10 @@
 
   <q-dialog
     v-model="afficherFormPlat">
-    <form-plat action="modifier" />
+    <form-plat action="modifier"
+    :platAModifier="plat"
+    @close="afficherFormPlat = false"
+    />
   </q-dialog>
 </q-card>
 </template>
