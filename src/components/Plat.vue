@@ -1,6 +1,10 @@
 <template>
 <q-card
   class="card">
+  <!-- TODO Proposer une image de remplacement si img vide
+    https://placehold.jp/en.html
+    https://picsum.photos/
+  -->
   <q-img
     :src="plat.image"
     basic
@@ -23,7 +27,7 @@
 
   <q-card-section class="description">
     <span v-if="plat.description">{{ plat.description }}</span>
-    <i v-else>Aucune description fournie</i>
+    <span class="text-italic" v-else>Aucune description fournie</span>
   </q-card-section>
 
   <q-card-actions
@@ -74,8 +78,7 @@ export default {
         persistent: true,
         ok: {
           label: 'Supprimer',
-          color: 'red',
-          push: true
+          color: 'red'
         },
         cancel: {
           label: 'Annuler',

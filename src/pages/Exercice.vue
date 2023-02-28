@@ -51,7 +51,6 @@ Exercice 3 - Vuex & Formulaires
 </template>
 
 <script>
-
 export default {
   data () {
     return {
@@ -64,6 +63,8 @@ export default {
     'form-plat': require('components/FormPlat.vue').default
   },
   computed: {
+    // TODO utiliser les mappers
+    // ...mapState('plats', ['plats'])
     plats () {
       return this.$store.getters['plats/plats']
     }

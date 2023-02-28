@@ -40,6 +40,15 @@ Mutations : méthode qui manipulent les données
 Les mutations ne peuvent pas être asynchrones !!!
  */
 const mutations = {
+  // TODO renommer les mutations en majuscule
+  // supprimerPlat => SUPPRIMER_PLAT
+  // TODO Commenter toutes vos fonctions et méthodes
+
+  /**
+   * Supprime un plat dans le state
+   * @param state
+   * @param id id du plat à supprimer
+   */
   supprimerPlat (state, id) {
     // Filtre les données du tableau
     // et garde les tâches dont l'id est différent de celui à supprimer
@@ -87,7 +96,15 @@ Sert à calculer, trier, filtrer ou formater les données
  */
 const getters = {
   plats: (state) => {
-    return state.plats
+    // TODO retourner un copie du state https://playcode.io/1157372
+    // TODO appliquer un tri par défaut
+    /*
+      https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+      https://usefulangle.com/post/227/javascript-sort-array-of-objects
+      https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+     */
+    // return [...state.plats].sort((a, b) => { return -1 })
+    return structuredClone(state.plats).sort((a, b) => a.nom.localeCompare(b.nom))
   }
 }
 

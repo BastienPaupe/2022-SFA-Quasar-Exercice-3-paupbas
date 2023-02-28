@@ -105,6 +105,8 @@ export default {
   mounted () {
     if (this.platAModifier) {
       // Copie les propriétés de plateAModifier dans un nouvel objet vide
+      // TODO Utiliser structuredClone
+      // this.plat = structuredClone(this.platAModifier)
       this.plat = Object.assign({}, this.platAModifier)
     }
   }
